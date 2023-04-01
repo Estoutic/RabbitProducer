@@ -2,9 +2,10 @@ package com.example.rabbitproducer.controllers;
 
 import com.example.rabbitproducer.controllers.models.DataDto;
 import com.example.rabbitproducer.services.RabbitMQProducerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 public class RabbitMqController {
@@ -22,5 +23,10 @@ public class RabbitMqController {
     @GetMapping("/version")
     public String healthCheck() {
         return "1.0";
+    }
+
+    @PostMapping("/file")
+    public void postFile(@RequestParam("file") MultipartFile rawFile) throws IOException {
+        rabbitMQProducerService.sendFileToQueue(rawFile.getBytes());
     }
 }

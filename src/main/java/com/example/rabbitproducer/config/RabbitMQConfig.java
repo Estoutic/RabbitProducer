@@ -16,7 +16,7 @@ public class RabbitMQConfig {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory("localhost");
         cachingConnectionFactory.setUsername("root");
         cachingConnectionFactory.setPassword("root");
-        cachingConnectionFactory.setVirtualHost("source");
+        cachingConnectionFactory.setVirtualHost("/");
         return cachingConnectionFactory;
     }
 
@@ -31,7 +31,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue myQueue() {
-        return new Queue("queueOne");
+        return new Queue("generatedQueue");
     }
 
     @Bean
